@@ -61,7 +61,7 @@ def check():
 def valid():
     r=Regno_ent.get()
     if(r.isdigit() and len(r)==8):
-      conitnue
+      pass
     else:
       messagebox.showerror("ERROR","Reg no. Not valid")
       Regno_ent.delete(0,END)
