@@ -1,0 +1,1 @@
+sub_btn.grid(row=7,column=10)
