@@ -65,6 +65,10 @@ def valid():
     else:
       messagebox.showerror("ERROR","Reg no. Not valid")
       Regno_ent.delete(0,END)
+def on_enter(e):
+   sub_btn.config(background='lightblue', foreground= "red")
+def on_leave(e):
+   sub_btn.config(background= 'white', foreground= 'black')
 # defining the geometry of parent window
 root=Tk()
 root.geometry('450x290')
@@ -81,9 +85,11 @@ ent.grid(row=4,column=10)
 ent_cap=Entry(root)
 ent_cap.grid(row=4,column=11)
 # adding buttons and images
-sub_btn=Button(root,text='Login',relief=RIDGE,height=2,width=10,bg='white',fg='black',activebackground='lightblue',activeforeground='red',font='Times 10 bold',command=check)
+sub_btn=Button(root,text='Login',relief=RIDGE,height=2,width=10,bg='white',fg='black',activebackground='blue',activeforeground='black',font='Times 10 bold',command=check)
 #to set the co ordinates
 sub_btn.place(x=180, y=160)
+sub_btn.bind('<Enter>', on_enter)
+sub_btn.bind('<Leave>', on_leave)
 img=PhotoImage(file="Refresh.png")
 refresh=Button(root,text="Refresh",relief=RIDGE,height=30,width=40,bg='white',image=img,activebackground='lightblue',command=refresh)
 refresh.grid(row=3,column=11)
