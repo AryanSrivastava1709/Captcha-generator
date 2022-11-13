@@ -1,5 +1,6 @@
 from tkinter import*
 import random
+from tkinter import messagebox
 # definig all the funtions:
 '''Function for the outlining of the captcha canvas
 and to design the captcha'''
@@ -25,12 +26,51 @@ def generate():
       value=random.randint(48,57)
       n+=chr(value)
   return n
-
+#defining the refresh function
+def refresh():
+  ent_cap.delete(0,END)
+  global code
+  g=generate()
+  code=g
+  outline()
+  c.create_text(160,40,text=code,font='calibri 28 bold')
+  c.grid(row=3,column=10)
+# defining check function
+def check():
+  chk=ent_cap.get()
+  ent_cap.delete(0,END)
+  global code
+  Reg=Regno_ent.get()
+  if(Reg.isdigit() and (len(Reg)==8 or len(Reg)==5)):
+    temp=Regno_ent.get()
+  else:
+    messagebox.showerror("ERROR","Registration number not valid")
+    Regno_ent.delete(0,END)
+    return 0
+  if(chk==code):
+    messagebox.showinfo("SUCCESSFULL","Registration number %s is accessed successfully"%temp)
+  else:
+    messagebox.showerror("ERROR","Wrong Captcha entered")
+    g=generate()
+    code=g
+    outline()
+    c.create_text(160,40,text=g,font='Calibri 28 bold')
+    c.grid(row=3,column=10)
+    see=Label(root,text='re-enter : ',font='Times 10')
+    see.grid(row=6,column=10)
+def valid():
+    r=Regno_ent.get()
+    if(r.isdigit() and len(r)==8):
+      conitnue
+    else:
+      messagebox.showerror("ERROR","Reg no. Not valid")
+      Regno_ent.delete(0,END)
 # defining the geometry of parent window
 root=Tk()
 root.geometry('450x290')
 root.title("Login")
 # designing the registration box
+code=generate()
 Reg_no=Label(root,text='Registration Number: ',font='calibri 15 bold')
 Reg_no.grid(row=1,column=10,sticky=E)
 Regno_ent=Entry(root)
@@ -41,11 +81,11 @@ ent.grid(row=4,column=10)
 ent_cap=Entry(root)
 ent_cap.grid(row=4,column=11)
 # adding buttons and images
-sub_btn=Button(root,text='Login',relief=RIDGE,height=2,width=10,bg='white',fg='black',activebackground='lightblue',activeforeground='red',font='Times 10 bold')
+sub_btn=Button(root,text='Login',relief=RIDGE,height=2,width=10,bg='white',fg='black',activebackground='lightblue',activeforeground='red',font='Times 10 bold',command=check)
 #to set the co ordinates
 sub_btn.place(x=180, y=160)
 img=PhotoImage(file="Refresh.png")
-refresh=Button(root,text="Refresh",relief=RIDGE,height=30,width=40,bg='white',image=img,activebackground='lightblue')
+refresh=Button(root,text="Refresh",relief=RIDGE,height=30,width=40,bg='white',image=img,activebackground='lightblue',command=refresh)
 refresh.grid(row=3,column=11)
 # adding canvas for captcha 
 c=Canvas(root,height=80,width=240)
