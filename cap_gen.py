@@ -1,7 +1,7 @@
 from tkinter import*
 # defining the geometry of parent window
 root=Tk()
-root.geometry('450x220')
+root.geometry('450x290')
 root.title("Login")
 # designing the registration box
 Reg_no=Label(root,text='Registration Number: ',font='calibri 15 bold')
