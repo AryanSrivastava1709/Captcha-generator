@@ -1,4 +1,31 @@
 from tkinter import*
+import random
+# definig all the funtions:
+'''Function for the outlining of the captcha canvas
+and to design the captcha'''
+code=" "
+def outline():
+  c.create_rectangle(80,10,240,70,fill='lightblue')
+  c.create_line(80,20,230,50)
+  c.create_line(85,55,180,25)
+  c.create_line(150,10,170,70)
+  c.create_line(100,65,240,40)
+# defining generating function
+def generate():
+  n=""
+  for i in range(0,6):
+    cap=random.randint(1,3)
+    if(cap==1):
+      value=random.randint(97,122)
+      n+=chr(value)
+    elif(cap==2):
+      value=random.randint(65,90)
+      n+=chr(value)
+    else:
+      value=random.randint(48,57)
+      n+=chr(value)
+  return n
+
 # defining the geometry of parent window
 root=Tk()
 root.geometry('450x290')
@@ -22,6 +49,7 @@ refresh=Button(root,text="Refresh",relief=RIDGE,height=30,width=40,bg='white',im
 refresh.grid(row=3,column=11)
 # adding canvas for captcha 
 c=Canvas(root,height=80,width=240)
-c.create_text(160,40,text="6dasd",font='calibri 28 bold')
+outline()
+c.create_text(160,40,text=code,font='calibri 28 bold')
 c.grid(row=3,column=10)
 root.mainloop()
