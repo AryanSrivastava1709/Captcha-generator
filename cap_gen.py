@@ -46,9 +46,20 @@ def check():
   else:
     messagebox.showerror("ERROR","Registration number not valid")
     Regno_ent.delete(0,END)
+    g=generate()
+    code=g
+    outline()
+    c.create_text(160,40,text=g,font='Calibri 28 bold')
+    c.grid(row=3,column=10)
     return 0
   if(chk==code):
     messagebox.showinfo("SUCCESSFULL","Registration number %s is accessed successfully"%temp)
+    Regno_ent.delete(0,END)
+    g=generate()
+    code=g
+    outline()
+    c.create_text(160,40,text=g,font='Calibri 28 bold')
+    c.grid(row=3,column=10)
   else:
     messagebox.showerror("ERROR","Wrong Captcha entered")
     g=generate()
@@ -56,15 +67,8 @@ def check():
     outline()
     c.create_text(160,40,text=g,font='Calibri 28 bold')
     c.grid(row=3,column=10)
-    see=Label(root,text='re-enter : ',font='Times 10')
+    see=Label(root,text='re-enter',font='Times 10')
     see.grid(row=6,column=10)
-def valid():
-    r=Regno_ent.get()
-    if(r.isdigit() and len(r)==8):
-      pass
-    else:
-      messagebox.showerror("ERROR","Reg no. Not valid")
-      Regno_ent.delete(0,END)
 def on_enter(e):
    sub_btn.config(background='lightblue', foreground= "red")
 def on_leave(e):
